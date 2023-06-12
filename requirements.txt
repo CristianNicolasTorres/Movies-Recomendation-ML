@@ -16,3 +16,5 @@ typing_extensions
 tzdata
 uvicorn
 scikit-learn
+locale
+os
