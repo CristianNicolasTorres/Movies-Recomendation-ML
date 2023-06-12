@@ -7,7 +7,7 @@ import numpy as np
 url='https://drive.google.com/file/d/1rDsPP32O5ZUKapVXgIlQe4K0tqW8YhgC/view?usp=sharing'
 url = 'https://drive.google.com/uc?id=' + url.split('/')[-2] 
 df_movies_recomendation=pd.read_csv(url)
-#df_movies_recomendation=pd.read_csv('D:\SoyHenry\Proyecto Integrador 1\Movies-Recomendation-ML\movies_actors_directors.csv')
+#df_movies_recomendation=pd.read_csv('Movies-Recomendation-ML\movies_actors_directors.csv')
 app=FastAPI()
 
 
