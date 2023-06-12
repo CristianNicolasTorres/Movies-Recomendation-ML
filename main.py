@@ -15,7 +15,7 @@ app=FastAPI()
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes: str):
     df_movies_recomendation['release_date'] = pd.to_datetime(df_movies_recomendation['release_date'])
-    df_movies_recomendation['mes'] = df_movies_recomendation['release_date'].dt.month_name(locale='es_ES')
+    df_movies_recomendation['mes'] = df_movies_recomendation['release_date'].dt.month_name(locale='en_US')
     cantidad = df_movies_recomendation[df_movies_recomendation['mes'] == mes.capitalize()].shape[0]
 
     return f"{cantidad} cantidad de películas fueron estrenadas en el mes de {mes}"
