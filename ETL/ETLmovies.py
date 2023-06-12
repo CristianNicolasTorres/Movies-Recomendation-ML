@@ -5,6 +5,7 @@ import numpy as np
 url='https://drive.google.com/file/d/1Rp7SNuoRnmdoQMa5LWXuK4i7W1ILblYb/view?usp=drive_link'
 url = 'https://drive.google.com/uc?id=' + url.split('/')[-2] 
 df=pd.read_csv(url)
+
 # drop columns wich are not usefull
 df_removed_columns = df[['video', 'imdb_id', 'adult', 'original_title', 'poster_path', 'homepage']].copy()
 df_droped=df.drop(['video', 'imdb_id', 'adult', 'original_title', 'poster_path', 'homepage'], axis=1)
