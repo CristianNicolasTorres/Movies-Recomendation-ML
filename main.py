@@ -2,7 +2,14 @@ from fastapi import FastAPI
 import uvicorn 
 import pandas as pd
 import numpy as np
+import locale
+import os
 
+#Set the locale to a compatible value
+locale.setlocale(locale.LC_ALL, 'C.UTF-8')
+
+#Set the environment variable for the locale configuration
+os.environ['LC_ALL'] = 'C.UTF-8'
 
 url='https://drive.google.com/file/d/1rDsPP32O5ZUKapVXgIlQe4K0tqW8YhgC/view?usp=sharing'
 url = 'https://drive.google.com/uc?id=' + url.split('/')[-2] 
