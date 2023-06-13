@@ -14,19 +14,27 @@ app=FastAPI()
 # Endpoint 1: cantidad_filmaciones_mes
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes: str):
+    valid_months = {'enero': 1, 'febrero': 2, 'marzo': 3, 'abril': 4,
+                    'mayo': 5, 'junio': 6, 'julio': 7, 'agosto': 8,
+                    'septiembre': 9, 'setiembre': 9, 'octubre': 10,
+                    'noviembre': 11, 'diciembre': 12}
+    variable = valid_months.get(mes.lower())
     df_movies_recomendation['release_date'] = pd.to_datetime(df_movies_recomendation['release_date'])
-    df_movies_recomendation['mes'] = df_movies_recomendation['release_date'].dt.month_name(locale='es_ES')
-    cantidad = df_movies_recomendation[df_movies_recomendation['mes'] == mes.capitalize()].shape[0]
+    # df_movies_recomendation['mes'] = df_movies_recomendation['release_date'].dt.month_name(locale='es_ES')
+    df_movies_recomendation['mes'] = df_movies_recomendation['release_date'].dt.month
+    cantidad = df_movies_recomendation[df_movies_recomendation['mes'] == variable].shape[0]
 
-    return f"{cantidad} cantidad de películas fueron estrenadas en el mes de {mes}"
+    return f"{cantidad} cantidad de películas fueron estrenadas en el mes de {mes.capitalize()}"
 
 # Endpoint 2: cantidad_filmaciones_dia
 @app.get('/cantidad_filmaciones_dia/{dia}')
 def cantidad_filmaciones_dia(dia: str):
+    valid_days= {'lunes': 0,'martes': 1,'miercoles': 2, 'jueves': 3, 'viernes': 4, 'sabado': 5, 'domingo':6}
+    lowerca= valid_days.get(dia.lower())
     df_movies_recomendation['release_date'] = pd.to_datetime(df_movies_recomendation['release_date'])
-    df_movies_recomendation['dia'] = df_movies_recomendation['release_date'].dt.day_name(locale='es_ES')
-    cantidad = df_movies_recomendation[df_movies_recomendation['dia'] == dia.capitalize()].shape[0]
-    return f"{cantidad} cantidad de películas fueron estrenadas en los días {dia}"
+    df_movies_recomendation['dia'] = df_movies_recomendation['release_date'].dt.dayofweek
+    cantidad = df_movies_recomendation[df_movies_recomendation['dia'] == lowerca].shape[0]
+    return f"{cantidad} cantidad de películas fueron estrenadas en los días {dia.capitalize()}"
 
 # Endpoint 3: score_titulo
 @app.get('/score_titulo/{titulo}')
@@ -113,10 +121,6 @@ def recommendation(title):
     recommendations = recommendations[recommendations != title]
 
     return {'lista recomendada': recommendations.tolist()[:5]}  # Return the first 5 recommendations
-
-
-
-
 
 
 
